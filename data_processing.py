@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 def load_data(file_path):
-    df = pd.read_csv('data/ds_salaries.csv')
+    df = pd.read_csv(file_path)
     X = df.drop('salary', axis=1)
     y = df['salary']
     return X, y
