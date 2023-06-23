@@ -8,16 +8,16 @@ from skopt import BayesSearchCV
 from ydata_profiling import ProfileReport
 
 # Przykładowe dane
-filepath = 'ASI_final/asi-kedro/data/01_raw/ds_salaries.csv'
+filepath = '/Users/tfkk/ASI_project/ASI_final/asi-kedro/data/01_raw/ds_salaries.csv'
 data = pd.read_csv(filepath)
 
 # print(data['job_title'].unique())
 
 
-
 # Wykonaj analizę danych
 profile = ProfileReport(data)
-# Możesz również użyć innych narzędzi do analizy danych
+
+profile.to_file('raport.html')
 
 
 ohe = OneHotEncoder()
