@@ -8,7 +8,7 @@ from skopt import BayesSearchCV
 from ydata_profiling import ProfileReport
 
 # Przykładowe dane
-filepath = '/Users/tfkk/ASI_project/ASI_final/asi-kedro/data/01_raw/ds_salaries.csv'
+filepath = 'ASI_final/asi-kedro/data/01_raw/ds_salaries.csv'
 data = pd.read_csv(filepath)
 
 # print(data['job_title'].unique())
