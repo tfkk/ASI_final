@@ -9,6 +9,11 @@ from typing import Any, Dict, Tuple
 import numpy as np
 import pandas as pd
 
+import wandb
+
+wandb.init(
+    project="asi-final",
+)   
 
 def split_data(
     data: pd.DataFrame, parameters: Dict[str, Any]
@@ -35,6 +40,9 @@ def split_data(
     return X_train, X_test, y_train, y_test
 
 
+import wandb
+from wandb.data_types import Table
+
 def make_predictions(
     X_train: pd.DataFrame, X_test: pd.DataFrame, y_train: pd.Series
 ) -> pd.Series:
@@ -48,6 +56,7 @@ def make_predictions(
     Returns:
         y_pred: Prediction of the target variable.
     """
+    wandb.log({"message": "Starting make_predictions function"})  # Log a message indicating the start of the function
 
     categorical_columns = ['experience_level', 'employment_type']
     numeric_columns = ['work_year']
@@ -69,7 +78,15 @@ def make_predictions(
     nearest_neighbour = squared_distances.argmin(axis=0)
     y_pred = pd.Series(y_train.iloc[nearest_neighbour].values, index=X_test.index, name='salary')
 
+    # Convert prediction values to a DataFrame
+    prediction_df = pd.DataFrame({"predictions": y_pred.values}, index=X_test.index)
+
+    # Log the predictions as a table in WandB
+    wandb.log({"predictions_table": Table(dataframe=prediction_df)})  
+
     return y_pred
+
+
 
 
 def report_accuracy(y_pred: pd.Series, y_test: pd.Series):

@@ -1,0 +1,1 @@
+{"input_dimensions": [3004, 10], "output_dimensions": [751], "_timestamp": 1687533659.805782, "_runtime": 1.4191851615905762, "_step": 1, "mean_predicted_salary": 414711.66444740345, "median_predicted_salary": 130000.0, "_wandb": {"runtime": 0}}

@@ -1,0 +1,35 @@
+{
+    "os": "macOS-13.4-arm64-arm-64bit",
+    "python": "3.9.6",
+    "heartbeatAt": "2023-06-23T15:10:05.191740",
+    "startedAt": "2023-06-23T15:10:04.183171",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "run"
+    ],
+    "state": "running",
+    "program": "/Users/dudama1/Library/Python/3.9/bin/kedro",
+    "git": {
+        "remote": "https://github.com/tfkk/ASI_final.git",
+        "commit": "075a17689cef4fcf07f5615d6337b189a442e77b"
+    },
+    "email": "marcin.duda@alcon.com",
+    "root": "/Users/dudama1/Desktop/ASI_final",
+    "host": "X621WPKP6C",
+    "username": "dudama1",
+    "executable": "/Library/Developer/CommandLineTools/usr/bin/python3",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "disk": {
+        "total": 460.4317207336426,
+        "used": 8.439250946044922
+    },
+    "gpuapple": {
+        "type": "arm",
+        "vendor": "Apple"
+    },
+    "memory": {
+        "total": 16.0
+    }
+}
