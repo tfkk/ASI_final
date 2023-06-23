@@ -49,15 +49,25 @@ def make_predictions(
         y_pred: Prediction of the target variable.
     """
 
-    X_train_numpy = X_train.to_numpy()
-    X_test_numpy = X_test.to_numpy()
+    categorical_columns = ['experience_level', 'employment_type']
+    numeric_columns = ['work_year']
+
+    # Perform one-hot encoding for categorical columns
+    X_train_encoded = pd.get_dummies(X_train[categorical_columns])
+    X_test_encoded = pd.get_dummies(X_test[categorical_columns])
+
+    # Concatenate encoded categorical columns and numeric columns
+    X_train_combined = pd.concat([X_train_encoded, X_train[numeric_columns]], axis=1)
+    X_test_combined = pd.concat([X_test_encoded, X_test[numeric_columns]], axis=1)
+
+    X_train_numpy = X_train_combined.astype(float).to_numpy()
+    X_test_numpy = X_test_combined.astype(float).to_numpy()
 
     squared_distances = np.sum(
-        (X_train_numpy[:, None, :] - X_test_numpy[None, :, :]) ** 2, axis=-1
+        (X_train_numpy[:, None] - X_test_numpy[None, :]) ** 2, axis=-1
     )
     nearest_neighbour = squared_distances.argmin(axis=0)
-    y_pred = y_train.iloc[nearest_neighbour]
-    y_pred.index = X_test.index
+    y_pred = pd.Series(y_train.iloc[nearest_neighbour].values, index=X_test.index, name='salary')
 
     return y_pred
 
