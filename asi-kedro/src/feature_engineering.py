@@ -11,15 +11,14 @@ from ydata_profiling import ProfileReport
 filepath = '/Users/tfkk/ASI_project/ASI_final/asi-kedro/data/01_raw/ds_salaries.csv'
 data = pd.read_csv(filepath)
 
-# print(data['job_title'].unique())
-
 
 # Wykonaj analizę danych
 profile = ProfileReport(data)
 
+#create html raport from dataset
 profile.to_file('raport.html')
 
-
+#encode data
 ohe = OneHotEncoder()
 feature_array = ohe.fit_transform(data[['job_title','experience_level', 'employment_type', 'employee_residence', 'company_location','salary_currency','company_size']]).toarray()
 
