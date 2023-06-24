@@ -7,18 +7,16 @@ from sklearn.svm import SVC
 from skopt import BayesSearchCV
 from ydata_profiling import ProfileReport
 
-# Przykładowe dane
+
 filepath = '/Users/tfkk/ASI_project/ASI_final/asi-kedro/data/01_raw/ds_salaries.csv'
 data = pd.read_csv(filepath)
 
 
-# Wykonaj analizę danych
-profile = ProfileReport(data)
 
-#create html raport from dataset
+profile = ProfileReport(data)
 profile.to_file('raport.html')
 
-#encode data
+#encode data using one-hot encoding
 ohe = OneHotEncoder()
 feature_array = ohe.fit_transform(data[['job_title','experience_level', 'employment_type', 'employee_residence', 'company_location','salary_currency','company_size']]).toarray()
 
@@ -30,13 +28,13 @@ data_encoded = pd.concat([data, features], axis=1)
 
 final = data_encoded.drop(['job_title','experience_level', 'employment_type', 'employee_residence', 'company_location','salary_currency','company_size'], axis=1)
 
-# Podziel dane na zbiór cech (X) i zmienną docelową (y)
+
 X = final.drop('salary', axis=1)
 y = final['salary']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=101)
 
-# Użyj grid search do znalezienia optymalnych hyperparametrów dla Random Forest Classifier
+
 param_grid_rf = {
     'n_estimators': [100, 200, 300],
     'max_depth': [None, 5, 10],
